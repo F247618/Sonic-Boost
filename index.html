@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonic Boost</title>
+    <style>
+
+       
+        body { font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; background-color: #f7f9fc; margin: 0; padding: 0; color: #333; }
+        header { background-color: #007bff; color: rgb(14, 87, 243); text-align: center; padding: 15px 0; }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; margin: 20px; }
+        .product { border: 1px solid #000dff; border-radius: 10px; margin: 15px; padding: 15px; text-align: center; background: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s; width: 250px; }
+        .product:hover { transform: scale(1.05); }
+        .product img { max-width: 100%; border-radius: 10px; }
+        .product button { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; }
+        .modal-content { background: white; padding: 20px; border-radius: 15px; width: 400px; text-align: center; }
+        footer { text-align: center; background-color: #f1f1f1; padding: 10px; font-size: 14px; color: #666; }
+
+        /* إضافة تأثيرات التحول الخلفية */
+@keyframes colorChange {
+    0% {
+        background-color: #007bff; /* الأزرق */
+    }
+    50% {
+        background-color: #ffffff; /* الأبيض */
+    }
+    100% {
+        background-color: #007bff; /* الأزرق */
+    }
+}
+
+body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* جعل الصفحة كاملة */
+    animation: colorChange 5s infinite; /* تكرار التحول بين الألوان */
+    transition: background-color 5s ease-in-out; /* إضافة تأثير الانتقال بين الألوان */
+}
+
+
+
+        #accountName{
+    width: 90%; /* لجعل العنصر يشغل العرض الكامل */
+    padding: 10px; /* إضافة مساحة داخلية */
+    border: 2px solid #ccc; /* تحديد لون الحدود */
+    border-radius: 8px; /* جعل الزوايا مستديرة */
+    font-size: 16px; /* تغيير حجم الخط */
+    background-color: #f9f9f9; /* تحديد لون الخلفية */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* إضافة تأثير عند التفاعل مع العنصر */
+}
+
+#accountName:focus {
+    outline: none; /* إزالة الحد الافتراضي عند التفاعل */
+    border-color: #007bff; /* تغيير لون الحدود عند التفاعل */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* إضافة تأثير الظل عند التفاعل */
+}
+
+#accountName[type="number"] {
+    -moz-appearance: textfield; /* لإخفاء الأسهم في الحقول الرقمية على المتصفحات المدعومة */
+    -webkit-appearance: none;
+}
+
+#accountName::placeholder {
+    color: #888; /* تغيير لون النص التوضيحي */
+    font-style: italic; /* جعل النص التوضيحي مائل */
+}
+
+#accountName:disabled {
+    background-color: #f0f0f0; /* تغيير الخلفية عندما يكون العنصر غير مفعل */
+    border-color: #ddd; /* تغيير لون الحدود */
+    cursor: not-allowed; /* تغيير شكل المؤشر عندما يكون العنصر غير مفعل */
+}
+#discordUser{
+    width: 90%; /* لجعل العنصر يشغل العرض الكامل */
+    padding: 10px; /* إضافة مساحة داخلية */
+    border: 2px solid #ccc; /* تحديد لون الحدود */
+    border-radius: 8px; /* جعل الزوايا مستديرة */
+    font-size: 16px; /* تغيير حجم الخط */
+    background-color: #f9f9f9; /* تحديد لون الخلفية */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* إضافة تأثير عند التفاعل مع العنصر */
+}
+
+#discordUser:focus {
+    outline: none; /* إزالة الحد الافتراضي عند التفاعل */
+    border-color: #007bff; /* تغيير لون الحدود عند التفاعل */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* إضافة تأثير الظل عند التفاعل */
+}
+
+#discordUser[type="number"] {
+    -moz-appearance: textfield; /* لإخفاء الأسهم في الحقول الرقمية على المتصفحات المدعومة */
+    -webkit-appearance: none;
+}
+
+#discordUser::placeholder {
+    color: #888; /* تغيير لون النص التوضيحي */
+    font-style: italic; /* جعل النص التوضيحي مائل */
+}
+
+#discordUser:disabled {
+    background-color: #f0f0f0; /* تغيير الخلفية عندما يكون العنصر غير مفعل */
+    border-color: #ddd; /* تغيير لون الحدود */
+    cursor: not-allowed; /* تغيير شكل المؤشر عندما يكون العنصر غير مفعل */
+}
+
+.buttondn {
+width: 50%;
+background-color: #eeeeee;
+height: 40%;
+
+}
+
+.buttondn:hover {
+    color: rgb(8, 8, 8);
+    background-color: rgb(9, 29, 250);
+
+}
+
+.btn4 {
+    width: 90%; /* لجعل العنصر يشغل العرض الكامل */
+    padding: 10px; /* إضافة مساحة داخلية */
+    border: 2px solid #ccc; /* تحديد لون الحدود */
+    border-radius: 8px; /* جعل الزوايا مستديرة */
+    font-size: 16px; /* تغيير حجم الخط */
+    background-color: #f9f9f9; /* تحديد لون الخلفية */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* إضافة تأثير عند التفاعل مع العنصر */
+}
+
+.btn4:hover{
+    outline: none; /* إزالة الحد الافتراضي عند التفاعل */
+    border-color: #007bff; /* تغيير لون الحدود عند التفاعل */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* إضافة تأثير الظل عند التفاعل */
+}
+
+.btn4[type="number"] {
+    -moz-appearance: textfield; /* لإخفاء الأسهم في الحقول الرقمية على المتصفحات المدعومة */
+    -webkit-appearance: none;
+}
+
+#btn4::placeholder {
+    color: #888; /* تغيير لون النص التوضيحي */
+    font-style: italic; /* جعل النص التوضيحي مائل */
+}
+
+#btn4:disabled {
+    background-color: #f0f0f0; /* تغيير الخلفية عندما يكون العنصر غير مفعل */
+    border-color: #ddd; /* تغيير لون الحدود */
+    cursor: not-allowed; /* تغيير شكل المؤشر عندما يكون العنصر غير مفعل */
+}
+
+#quantity{
+    width: 90%; /* لجعل العنصر يشغل العرض الكامل */
+    padding: 10px; /* إضافة مساحة داخلية */
+    border: 2px solid #ccc; /* تحديد لون الحدود */
+    border-radius: 8px; /* جعل الزوايا مستديرة */
+    font-size: 16px; /* تغيير حجم الخط */
+    background-color: #f9f9f9; /* تحديد لون الخلفية */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* إضافة تأثير عند التفاعل مع العنصر */
+}
+
+#quantity:hover{
+    outline: none; /* إزالة الحد الافتراضي عند التفاعل */
+    border-color: #007bff; /* تغيير لون الحدود عند التفاعل */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* إضافة تأثير الظل عند التفاعل */
+}
+
+#quantity[type="number"] {
+    -moz-appearance: textfield; /* لإخفاء الأسهم في الحقول الرقمية على المتصفحات المدعومة */
+    -webkit-appearance: none;
+}
+
+#quantity::placeholder {
+    color: #888; /* تغيير لون النص التوضيحي */
+    font-style: italic; /* جعل النص التوضيحي مائل */
+}
+
+#quantity:disabled {
+    background-color: #f0f0f0; /* تغيير الخلفية عندما يكون العنصر غير مفعل */
+    border-color: #ddd; /* تغيير لون الحدود */
+    cursor: not-allowed; /* تغيير شكل المؤشر عندما يكون العنصر غير مفعل */
+}
+
+
+.btmn {
+    width: 90%; /* لجعل العنصر يشغل العرض الكامل */
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: #000dff;
+}
+
+.btmn:hover{
+    background-color: #ffffff;
+}
+
+.btmn5{
+    background-color: #000dff ; color: #eeeeee
+}
+
+ 
+
+
+
+    </style>
+    <link rel="icon" href="IMG_1807.png ">
+</head>
+<body>
+    <header>
+        <h1 style="color: #ddd;"> Sonic Boost </h1>
+    </header>
+
+    <div class="container" id="products"></div>
+
+    <!-- نافذة تحديد الكمية -->
+    <div id="quantityModal" class="modal">
+        <div class="modal-content">
+            <h3>تحديد الكمية</h3>
+            <p>السعر: <span id="quantityModalPrice"></span> $</p>
+            <input type="number" id="quantity" min="1" value="1" style="width: 80%; padding: 10px; margin: 10px 0;">
+            <br>
+            <button class="btn4" onclick="proceedToPayment()">التالي</button>
+        </div>
+    </div>
+
+    <!-- نافذة اختيار طرق الدفع -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <h3>اختر طريقة الدفع</h3>
+            <p>السعر الإجمالي: <span id="modalPrice"></span> $</p>
+            <br>            <div>
+               <h3> Stc Pay : 
+                <br>
+                0555219902
+               </h3>
+
+               <h3> Pay Pal :
+                <br>
+                Fadi.Melebari@gmail.com
+             </h3>
+             <button class="btmn"   onclick="choosePayment('الراجحي')">تم الدفع</button>
+
+            </div>
+    
+        </div>
+
+    </div>
+
+    <!-- صفحة تأكيد الدفع -->
+    <div id="confirmationPage" class="modal">
+        <div class="modal-content">
+            <h3>إدخال معلومات التحويل</h3>
+            <form id="paymentForm">
+                <input type="text" id="accountName" placeholder="اسم صاحب الحساب" required><br><br>
+                <input type="text" id="discordUser" placeholder="يوزرك في ديسكورد" required><br><br>
+                <button type="button"class="btmn" onclick="submitPayment()" >تم التحويل</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="btmn5">
+        &copy; Sonic Boost 
+    </footer>
+
+    <script>
+        const products = [
+            { name: "بوستات ديسكورد", description: "1.5$بوستات ديسكورد ل مده شهر اقل شيء بوستين ب ", price: "علئ حسب العدد افتح تكت واستفسر", img: "IMG_1807.png" },
+
+
+            { name: "بوستات فايف ام 24ساعه ", description: "دولار 195بوستات فايف ام مدت ساعه 24 اقل شيء 500 بوست ب سعر : ", price: "195", img: "IMG_1807.png", min: 500, max: 2500 },
+
+
+            { name: "نيترو", description: "اشتراك نيترو لمدة شهر.", price: 8.5, img: "IMG_1807.png" },
+
+
+            { name: "توكنات نيترو", description: " تـوكن نيترو لمدة شهر = 1$ دولار للواحد:  تـوكن نيترو لمدة 3 أشهر = 2$ دولار للواحد : يوجد  ضمان لمدة 12 ساعة ", price: "علئ حسب العدد افتح تكت واستفسر", img: "IMG_1807.png" },
+
+
+            { name: "اعضاء ديسكورد اوفلاين", description: "  500 عضو اوفلاين / 10$ :  1000 عضو اوفلاين /17$  " ,price: "علئ حسب العدد افتح تكت واستفسر", img: "IMG_1807.png" },
+
+
+            { name: "اعضاء فايف ام وهمين ", description: " 20 عضو= 90$ : 30 عضو = 125$ ", price: 50, img: "IMG_1807.png" },
+
+
+            { name: " فتح متجر خاص بك", description: " نوفر لك في هذة الخدمة : 1- اداة بـ9ستات مدى الحياة : 2- اداة رياكشنات مدى الحياة : 3- اداة تـ9كن نيتر9 تشيكر سورس  كود : 4- اداة تـ9كن تشيكر الأصدر الثاني سورس  كود  : 5- اداة تـ9كن فورماتر سورس  كود : 6- اداة تـ9كن اونلاين الاصدار الثاني سورس  كود : 7- اداة نسخ سيرفرات الاصدار الثاني سورس كود  : 8-  14 تـ9كن مدة 3 اشهر : 9- 3 نيترو قيمنق مدة شهر : 10- دسكورد يوجد فيه رومات مبرمجة بالكامل :  14 بـ9ست مدة 3 اشهر للمتجر الخاص بك", 
+            price: 100, img: "IMG_1807.png" },
+
+
+            { name: "اداة اختصارات مجانية ", description: "  ترسلك اختصارات متاحة سريعة  ", price: 13, img: "IMG_1807.png" },
+
+
+            { name: "نسخ سيرفرات", description: "سريعة  تنسخ جميع الرومات الكتابية  تنسخ جميع الرومات الصوتية تنسخ جميع الرتب  تنسخ جميع البرمشنات تنسخ جميع الايموجيات تنسخ صورة السيرفر  تنسخ اسم السيرفر  تنسخ اعدادات السيرفر  تنسخ جميع ايموجيات السيرفر ",
+             price: 17, img: "IMG_1807.png" },
+
+
+            { name: "اداه رياكشنات ", description: "1- سرعة خيالية في وضع رياكشن 2- تستطيع تحديد عدد الرياكشنات المطلوبة 3- سهله الأستخدام : متطلبات توكنات فقط ", price: 23, img: "IMG_1807.png" },
+
+
+            { name: "برمجه دسكورد", description: "برمجه دسكورد من الصفر او التعديل علئ جميع الرومات والرتب و البرمشنات ولوقات وكل شيء من الصفر الئ الياء السعر علئ حسب الطلب مب ثابت", price: 10, img: "IMG_1807.png" },
+
+
+            { name: " اعضاء دسكورد وهمين اونلاين", description: "اعضاء لزياده الدسكورد يكونون متصلين باسعار رخيصه 500 = 12دولار و 1000 = 20 دولار ", price: 12, img: "IMG_1807.png" },
+
+
+            { name: "اداه بوستات", description:
+" تـم تـوفـيـر اداة بوستات الاصدار الثالث المميزات :  1- سرعة خيالية في دخول الاعضاء 2- تغير اسم التوكن 3- تغير بايو التوكن 4 - تغير صورة الأفتار 5 - تغير صورة البنر 6- تخلي التوكن اونلاين من نفسها بمجرد تضرب البوستات 7- تقوم بفحص التوكنات الشغاله و العطلانة 8- تستطيع رؤية المخزون 9- يوجد بها لوقات للتعزيزات 10- سهله الأستخدام 11- تعزيز الخوادم بشكل سريع  13- تدعم بروكسي المتطلبات :1- تحتاج توكنات نيترو شهر او ثلاث اشهر   2- تحتاج Hcoptcha او Capsolver  3- تحتاج بروكسي الأسعار :يوم : 5$اسبوع  :12$*شهر 23$مدى الحياة : 38$", 
+price: 55, img: "IMG_1807.png" },
+        ];
+        const productContainer = document.getElementById("products");
+        const quantityModal = document.getElementById("quantityModal");
+        const paymentModal = document.getElementById("paymentModal");
+        const confirmationPage = document.getElementById("confirmationPage");
+        const quantityModalPrice = document.getElementById("quantityModalPrice");
+        const modalPrice = document.getElementById("modalPrice");
+        const quantityInput = document.getElementById("quantity");
+
+        let selectedProduct = null;
+        let selectedQuantity = 1;
+        let selectedPaymentMethod = null;
+
+        products.forEach((product, index) => {
+            const div = document.createElement("div");
+            div.classList.add("product");
+            div.innerHTML = `
+                <img src="${product.img}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>${product.description}</p>
+                <p><strong>${product.price} $</strong></p>
+                <button onclick="openQuantityModal(${index})">شراء المنتج</button>
+            `;
+            productContainer.appendChild(div);
+        });
+
+        function openQuantityModal(index) {
+            selectedProduct = products[index];
+            quantityModalPrice.textContent = selectedProduct.price;
+            quantityInput.min = selectedProduct.min || 1;
+            quantityInput.max = selectedProduct.max || 9999;
+            quantityInput.value = selectedProduct.min || 1;
+            quantityModal.style.display = "flex";
+        }
+
+        function proceedToPayment() {
+            selectedQuantity = parseInt(quantityInput.value) || 1;
+            const totalPrice = selectedProduct.price * selectedQuantity;
+            modalPrice.textContent = totalPrice;
+            quantityModal.style.display = "none";
+            paymentModal.style.display = "flex";
+        }
+
+        function choosePayment1(method) {
+            selectedPaymentMethod = method;
+            paymentModal.style.display = "none";
+            confirmationPage.style.display = "flex";
+        }
+
+
+        function choosePayment(method) {
+            selectedPaymentMethod = method;
+            paymentModal.style.display = "none";
+            confirmationPage.style.display = "flex";
+        }
+
+        async function submitPayment() {
+            const accountName = document.getElementById("accountName").value;
+            const discordUser = document.getElementById("discordUser").value;
+
+            if (!accountName || !discordUser) {
+                alert("يرجى ملء جميع الحقول.");
+                return;
+            }
+
+        // إعداد الـ Webhook
+        const webhookURL = "https://discord.com/api/webhooks/1322940471592615967/h3G3-YQ9sJSRxQ2WKTbWD9Vj8xx1Sz_0UsqJye_OpuD3t-GR-goZNyFGq62GV-2XbI9X"; 
+        const payload = {
+            content: "***عملية شراء جديدة ***",
+            embeds: [
+                {
+                    title: "تفاصيل الطلب",
+                    fields: [
+                        { name: "اسم صاحب الحساب:", value: accountName, inline: true },
+
+                        { name: "اسم مستخدم ديسكورد:", value: discordUser, inline: true },
+
+                        { name: "اسم المنتج:", value: selectedProduct.name, inline: false },
+
+                        { name: "الكمية:", value: selectedQuantity.toString(), inline: true },
+                        
+                        { name: "إجمالي السعر:", value: `${selectedProduct.price * selectedQuantity} $`, inline: true }
+                    ],
+                    color: 3447003 // لون جميل للإيمبد
+                }
+            ]
+        };
+
+        try {
+            const response = await fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                alert("تم إرسال بياناتك بنجاح!");
+                confirmationPage.style.display = "none"; // إخفاء صفحة التأكيد
+            } else {
+                alert("حدث خطأ أثناء إرسال البيانات. حاول مجددًا.");
+            }
+        } catch (error) {
+            console.error("خطأ:", error);
+            alert("تعذر إرسال البيانات.");
+        }
+    }
+    </script>
+</body>
+</html>
